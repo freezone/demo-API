@@ -3,7 +3,7 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,10 @@ import { MessagesComponent } from './messages/messages.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './_modules/shared.module';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { errorInterceptor } from './_interceptors/error.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,10 @@ import { TransactionsComponent } from './transactions/transactions.component';
     MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TestErrorComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,11 @@ import { TransactionsComponent } from './transactions/transactions.component';
     SharedModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([errorInterceptor])
+    )
   ],
   bootstrap: [AppComponent]
 })

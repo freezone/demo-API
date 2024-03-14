@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Member } from '../../_models/member';
+import { MembersService } from '../../_services/members.service';
 
 @Component({
   selector: 'app-member-list',
@@ -7,19 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './member-list.component.css'
 })
 export class MemberListComponent implements OnInit {
-  users: any;
+  members: Member[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private memberService: MembersService) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.loadMembers();
   }
 
-  getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe({
-      next: response => this.users = response,
-      error: error => console.log(error),
-      complete: () => console.log('Request has completed')
-    });
+  loadMembers() {
+    this.memberService.getMembers().subscribe({
+      next: members => this.members = members
+    })
   }
 }

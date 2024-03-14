@@ -20,6 +20,8 @@ import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { errorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { jwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,13 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
-    MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
     TransactionsComponent,
     TestErrorComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberCardComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     provideClientHydration(),
     provideHttpClient(
       withFetch(),
-      withInterceptors([errorInterceptor])
+      withInterceptors([errorInterceptor, jwtInterceptor])
     )
   ],
   bootstrap: [AppComponent]

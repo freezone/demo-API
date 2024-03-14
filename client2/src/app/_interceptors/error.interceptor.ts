@@ -5,8 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (request, next) => {
-  console.log('Intercept')
-
   const toastr = inject(ToastrService);
   const router = inject(Router);
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],
@@ -13,9 +14,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       timeOut: 5000,
       progressBar: true
     }),
+    NgxSpinnerModule.forRoot({
+      type: 'line-scale-party'
+    })
   ],
   exports: [
-    ToastrModule
+    ToastrModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }
